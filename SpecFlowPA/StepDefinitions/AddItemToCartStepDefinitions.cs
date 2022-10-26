@@ -55,9 +55,11 @@ namespace SpecFlowPA.StepDefinitions
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             fluentWait.Message = "Element to be searched not found";
 
-            fluentWait.Until(x => x.FindElement(By.XPath("//*[@id='layer_cart']/div[1]")));
+            fluentWait.Until(x => x.FindElement(By.XPath("//*[@id='layer_cart']/div[1]")).Displayed);
 
-            Assert.That(driver.FindElement(By.XPath("//*[@id='layer_cart']/div[1]")).Enabled);
+            var addedItem = driver.FindElement(By.XPath("//*[@id='layer_cart_product_title']")).Text;
+            Assert.AreEqual("Faded Short Sleeve T-shirts", addedItem.ToString());
+
             driver.Close();
             
         }
